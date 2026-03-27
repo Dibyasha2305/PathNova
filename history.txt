@@ -1,0 +1,30 @@
+I developed a calc using efficient coding practices.
+Hi Kiara, I came across your profile and really admire your work in AIML. I am currently a student exploring this field and would love to connect and learn from you.
+Hi dia, I came across your profile and really admire your work in made this. I am currently a student exploring this field and would love to connect and learn from you.
+
+--- Resume Score ---
+Score: 10/10
+
+
+--- Resume Score ---
+- Use strong action words (developed, designed, implemented)
+- Add technical skills (Java, Python, SQL)
+- Make the sentence more descriptive
+Score: 0/10
+
+
+--- Job Match Analysis ---
+Match Percentage: 100%
+Strong match! You're a good fit.
+
+Missing Skills:
+
+
+--- Job Match Analysis ---
+Match Percentage: 50%
+Moderate match. You're on the right track.
+
+Missing Skills:
+- dsa
+- api
+
