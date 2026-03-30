@@ -15,10 +15,18 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> history = loadFromFile();
 
+        // Welcome Screen
+        printDivider();
+        typePrint("Welcome to PathNova ");
+        typePrint("Your Personal Career Intelligence System");
+        printDivider();
+        
+
         while (true) {
-            System.out.println("\n--------------------------------------");
-            System.out.println("      PathNova Pro - Career System       ");
-            System.out.println("-----------------------------------------");
+
+            printDivider();
+            System.out.println("        PathNova Pro - Career System");
+            printDivider();
             System.out.println("1. Resume Improver");
             System.out.println("2. Resume Scorer");
             System.out.println("3. Job Matcher");
@@ -27,40 +35,49 @@ public class Main {
             System.out.println("6. Skill Gap Analyzer");
             System.out.println("7. View History");
             System.out.println("8. Exit");
-            System.out.println("-----------------------------------------");
+            printDivider();
 
-            System.out.print("Enter your choice: ");
+            System.out.print("Please enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
 
+            //  Resume Improver
             if (choice == 1) {
                 System.out.print("Enter your sentence: ");
                 String input = sc.nextLine();
 
+                showLoading();
                 String improved = ResumeEnhancer.improve(input);
 
-                System.out.println("\n---------- RESULT -----------");
+                printDivider();
+                System.out.println("RESUME IMPROVEMENT RESULT");
+                printDivider();
                 System.out.println(improved);
-                System.out.println("-------------------------------");
+                printDivider();
 
                 history.add(improved);
                 FileManager.save("resume", improved);
             }
 
+            //  Resume Scorer
             else if (choice == 2) {
                 System.out.print("Enter your resume line: ");
                 String input = sc.nextLine();
 
+                showLoading();
                 String result = ResumeScorer.score(input);
 
-                System.out.println("\n----------- SCORE ----------");
+                printDivider();
+                System.out.println("RESUME SCORE");
+                printDivider();
                 System.out.println(result);
-                System.out.println("------------------------------");
+                printDivider();
 
                 history.add(result);
                 FileManager.save("analysis", result);
             }
 
+            //  Job Matcher
             else if (choice == 3) {
                 System.out.print("Enter your resume text: ");
                 String resume = sc.nextLine();
@@ -68,44 +85,59 @@ public class Main {
                 System.out.print("Enter job description: ");
                 String jobDesc = sc.nextLine();
 
+                showLoading();
                 String result = JobMatcher.match(resume, jobDesc);
-                System.out.println("\n---------- MATCH RESULT ---------");
+
+                printDivider();
+                System.out.println("JOB MATCH ANALYSIS");
+                printDivider();
                 System.out.println(result);
-                System.out.println("------------------------------------");
+                printDivider();
 
                 history.add(result);
                 FileManager.save("job", result);
             }
-            
+
+            //  DM Generator
             else if (choice == 4) {
                 System.out.print("Enter person's name: ");
                 String name = sc.nextLine();
 
                 System.out.print("Enter field: ");
                 String field = sc.nextLine();
+
+                showLoading();
                 String message = DMGenerator.generate(name, field);
 
-                System.out.println("\n--------- GENERATED DM --------");
+                printDivider();
+                System.out.println("GENERATED DM");
+                printDivider();
                 System.out.println(message);
-                System.out.println("----------------------------------");
+                printDivider();
 
                 history.add(message);
                 FileManager.save("dm", message);
             }
+
+            //  Career Roadmap
             else if (choice == 5) {
                 System.out.print("Enter your career goal: ");
                 String goal = sc.nextLine();
 
+                showLoading();
                 String roadmap = RoadmapGenerator.generate(goal);
 
-                System.out.println("\n---------- ROADMAP ----------");
+                printDivider();
+                System.out.println("CAREER ROADMAP");
+                printDivider();
                 System.out.println(roadmap);
-                System.out.println("-------------------------------");
+                printDivider();
 
                 history.add(roadmap);
                 FileManager.save("roadmap", roadmap);
             }
 
+            //  Skill Analyzer
             else if (choice == 6) {
                 System.out.print("Enter your goal: ");
                 String goal = sc.nextLine();
@@ -113,18 +145,26 @@ public class Main {
                 System.out.print("Enter your skills (comma separated): ");
                 String skills = sc.nextLine();
 
+                showLoading();
                 String analysis = SkillAnalyzer.analyze(goal, skills);
 
-                System.out.println("\n---------- ANALYSIS ----------");
+                printDivider();
+                System.out.println("SKILL ANALYSIS");
+                printDivider();
                 System.out.println(analysis);
-                System.out.println("--------------------------------");
+                printDivider();
 
                 history.add(analysis);
                 FileManager.save("analysis", analysis);
             }
 
+            // View History
             else if (choice == 7) {
-                System.out.println("\n----------- HISTORY -----------");
+                showLoading();
+
+                printDivider();
+                System.out.println("HISTORY");
+                printDivider();
 
                 if (history.isEmpty()) {
                     System.out.println("No history available.");
@@ -135,22 +175,29 @@ public class Main {
                     }
                 }
 
-                System.out.println("-----------------------------------------");
+                printDivider();
             }
 
+            //Exit
             else if (choice == 8) {
-                System.out.println("\nThank you for using PathNova Pro!");
+                System.out.println("\nThank you for using PathNova Pro 🚀");
                 break;
             }
+
+            //invalid
             else {
                 System.out.println("Invalid choice. Try again!");
             }
+
+            // Pause
             System.out.println("\nPress Enter to continue...");
             sc.nextLine();
-        }sc.close();
+        }
+
+        sc.close();
     }
 
-
+    //Loading history
     public static ArrayList<String> loadFromFile() {
         ArrayList<String> history = new ArrayList<>();
 
@@ -163,11 +210,39 @@ public class Main {
                 while (reader.hasNextLine()) {
                     history.add(reader.nextLine());
                 }
+
                 reader.close();
             }
         } catch (Exception e) {
-            System.out.println("No previous history found.");        }
+            System.out.println("No previous history found.");
+        }
 
         return history;
+    }
+
+    //UI Helpers
+    public static void printDivider() {
+        System.out.println("========================================");
+    }
+
+    public static void typePrint(String text) {
+        for (char c : text.toCharArray()) {
+            System.out.print(c);
+            try {
+                Thread.sleep(8);
+            } catch (Exception e) {}
+        }
+        System.out.println();
+    }
+
+    public static void showLoading() {
+        System.out.print("Processing");
+        for (int i = 0; i < 3; i++) {
+            System.out.print(".");
+            try {
+                Thread.sleep(300);
+            } catch (Exception e) {}
+        }
+        System.out.println();
     }
 }
